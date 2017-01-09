@@ -12,8 +12,15 @@ export default class createElements {
     if (sym !== singletonEnforcer) throw new Error('Cannot construct singleton');
     this.findElement = findElements.instance;
     this.findElement.getSlidersByAttribute().forEach(each => {
-
+      this.createCustom(each);
     });
+  }
+
+  static get instance() {
+    if (!this[singleton]) {
+      this[singleton] = new createElements(singletonEnforcer);
+    }
+    return this[singleton];
   }
   
   createCustom(elem) {
@@ -27,5 +34,7 @@ export default class createElements {
     fill.className = 'fill';
     body.appendChild(fill);
     elem.appendChild(body);
+    const slider = this.findElement.getSliderByContext(elem);
+    slider.fill = startFrom;
   }
 }

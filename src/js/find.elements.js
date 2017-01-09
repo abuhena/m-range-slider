@@ -24,11 +24,10 @@ export default class findElements {
   getSlidersByAttribute() {
     const nodeList = document.getElementsByTagName('*');
     const nodeArray = [];
-    let iterator = 0;
-    let node = null;
-
-    while (node = nodeList[iterator++]) {
-      if (node.hasAttribute(this.attribute)) nodeArray.push(node);
+    for ( let i = 0; nodeList.length > i; i++) {
+      if (nodeList[i].hasAttribute(this.attribute)) {
+        nodeArray.push(nodeList[i]);
+      }
     }
 
     return nodeArray;
@@ -51,14 +50,15 @@ export default class findElements {
 
   getSliderByContext(context) {
     if (context.hasAttribute(this.attribute)) {
+      const that = this;
       return {
         set fill (range) {
           let startFrom = parseInt(context.getAttribute('data-start'));
           let rangeEnd = parseInt(context.getAttribute('data-range'));
-          startFrom = (startFrom || startFrom !== 0) || this.defaultStart;
-          rangeEnd = (rangeEnd || rangeEnd !== 0) || this.defaultRange;
+          startFrom = !startFrom ? that.defaultStart : startFrom;
+          rangeEnd = !rangeEnd ? that.defaultRange : rangeEnd;
           if (range >= startFrom && range <= rangeEnd) {
-            context.firstChild.parentElement.style.width = `${(context.clientWidth / rangeEnd) * range}px`;
+            context.childNodes[0].childNodes[0].style.width = `${(context.clientWidth / rangeEnd) * range}px`;
             context.setAttribute('data-fill', range);
             return true;
           }
@@ -67,7 +67,7 @@ export default class findElements {
         get fill () {
           let rangeEnd = parseFloat(context.getAttribute('data-range'));
           rangeEnd = (rangeEnd || rangeEnd !== 0) || this.defaultRange;
-          const currentFill = ((context.firstChild.parentElement.clientWidth * rangeEnd)
+          const currentFill = ((context.childNodes[0].childNodes[0].clientWidth * rangeEnd)
            / context.clientWidth);
           if (parseFloat(context.getAttribute('data-fill')) === currentFill) {
             return currentFill;
