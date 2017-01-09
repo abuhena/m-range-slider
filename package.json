@@ -1,0 +1,21 @@
+{
+  "name": "m-range-slider",
+  "version": "0.0.0",
+  "description": "Simple range slider",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Shariar Shaikot",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-less": "^1.4.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2"
+  }
+}
