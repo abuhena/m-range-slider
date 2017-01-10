@@ -63,7 +63,6 @@ export default class findElements {
             const thumbArea = 20;
             nodes[0].style.width = `${fillArea}px`;
             nodes[1].style.left = `${fillArea}px`;
-            nodes[1].style.bottom = '-10px';
             nodes[2].style.width = `${context.clientWidth - fillArea - thumbArea}px`;
             context.setAttribute('data-fill', range);
             return true;

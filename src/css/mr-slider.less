@@ -1,25 +1,31 @@
 .mr-slider {
-  height: 2px;
+  height: 20px;
   width: 100%;
   position: relative;
   padding: 0;
   background-color: @water;
   .fill {
-    background-color: @fill;
     width: 0;
-    height: 2px;
+    height: 20px;
     position: absolute;
-    top: 0;
     left: 0;
     cursor: pointer;
+    &:first-child {
+      width: 2px;
+      background-color: @fill;
+    }
   }
   .toFill {
     background-color: @body;
-    height: 2px;
+    height: 20px;
     position: absolute;
     right: 0;
     top: 0;
     cursor: pointer;
+    &:first-child {
+      width: 2px;
+      background-color: @body;
+    }
   }
   .thumb {
     height: 18px;
