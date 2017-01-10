@@ -2,7 +2,7 @@
  * Created by Shariar Shaikot on 1/9/17.
  */
 
-import findElements from './find.elements';
+import findElements from './find.slider';
 
 const singleton = Symbol();
 const singletonEnforcer = Symbol();
@@ -32,7 +32,13 @@ export default class createElements {
     body.className = 'mr-slider';
     const fill = document.createElement('div');
     fill.className = 'fill';
+    const thumb = document.createElement('div');
+    thumb.className = 'thumb';
+    const toFill = document.createElement('div');
+    toFill.className = 'toFill';
     body.appendChild(fill);
+    body.appendChild(thumb);
+    body.appendChild(toFill);
     elem.appendChild(body);
     const slider = this.findElement.getSliderByContext(elem);
     slider.fill = startFrom;

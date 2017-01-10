@@ -58,7 +58,13 @@ export default class findElements {
           startFrom = !startFrom ? that.defaultStart : startFrom;
           rangeEnd = !rangeEnd ? that.defaultRange : rangeEnd;
           if (range >= startFrom && range <= rangeEnd) {
-            context.childNodes[0].childNodes[0].style.width = `${(context.clientWidth / rangeEnd) * range}px`;
+            const nodes = context.childNodes[0].childNodes;
+            const fillArea = ((context.clientWidth / rangeEnd) * range);
+            const thumbArea = 20;
+            nodes[0].style.width = `${fillArea}px`;
+            nodes[1].style.left = `${fillArea}px`;
+            nodes[1].style.bottom = '-10px';
+            nodes[2].style.width = `${context.clientWidth - fillArea - thumbArea}px`;
             context.setAttribute('data-fill', range);
             return true;
           }

@@ -3,7 +3,7 @@
   width: 100%;
   position: relative;
   padding: 0;
-  background-color: @body;
+  background-color: @water;
   .fill {
     background-color: @fill;
     width: 0;
@@ -11,5 +11,19 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+  .toFill {
+    background-color: @body;
+    height: 2px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .thumb {
+    height: 18px;
+    width: 18px;
+    border: 2px solid @fill;
+    border-radius: 50%;
+    position: absolute;
   }
 }
