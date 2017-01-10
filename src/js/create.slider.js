@@ -42,6 +42,7 @@ export default class createElements {
     body.appendChild(toFill);
     elem.appendChild(body);
     const events = new EventsSlider(elem);
+    events.bindmouseover();
     const slider = this.findElement.getSliderByContext(elem);
     slider.fill = startFrom;
   }
