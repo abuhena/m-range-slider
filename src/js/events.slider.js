@@ -38,6 +38,16 @@ export default class EventsSlider {
     }.bind(this));
     this._private.get(this).fill.addEventListener('mousemove', this.thumbMove.bind(this));
     this._private.get(this).toFill.addEventListener('mousemove', this.thumbMove.bind(this));
+    this._private.get(this).fill.addEventListener('mouseout', function () {
+      console.info('mousedown');
+      this.mousedown = false;
+    }.bind(this));
+    this._private.get(this).toFill.addEventListener('mouseout', function () {
+      this.mousedown = false;
+    }.bind(this));
+
+    this._private.get(this).fill.addEventListener('click', this.seeked.bind(this));
+    this._private.get(this).toFill.addEventListener('click', this.seeked.bind(this));
   }
   
   seekIntent(event) {
@@ -55,6 +65,18 @@ export default class EventsSlider {
       }});
     }
   }
+  
+  seeked(event) {
+    let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
+    rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
+    let onLeft = event.offsetX;
+    onLeft = event.target.classList.contains('fill') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
+
+    const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
+    const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
+    findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
+  }
+  
   thumbMove(event) {
     if (this.mousedown) {
       console.info(event);
@@ -65,7 +87,7 @@ export default class EventsSlider {
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      console.info(fillIntentArea, onLeft);
+      //console.info(fillIntentArea, onLeft);
       findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
     }
   } 

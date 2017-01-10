@@ -6,26 +6,26 @@
   background-color: @water;
   .fill {
     width: 0;
+    transition: width 250ms;
     height: 20px;
     position: absolute;
     left: 0;
     cursor: pointer;
+    background-color: transparent;
     &:first-child {
-      width: 2px;
+      height: 2px;
       background-color: @fill;
+      top: 10px;
     }
   }
-  .toFill {
-    background-color: @body;
+  .unfilled {
+    width: 0;
+    transition: width 250ms;
     height: 20px;
     position: absolute;
     right: 0;
-    top: 0;
     cursor: pointer;
-    &:first-child {
-      width: 2px;
-      background-color: @body;
-    }
+    background-color: @water;
   }
   .thumb {
     height: 18px;
@@ -33,5 +33,14 @@
     border: 2px solid @fill;
     border-radius: 50%;
     position: absolute;
+    transition: left 250ms;
   }
+}
+
+.unfill-child {
+  transition: width 250ms;
+  height: 2px;
+  background-color: @body;
+  position: relative;
+  top: 10px;
 }

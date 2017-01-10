@@ -31,12 +31,20 @@ export default class createElements {
     rangeEnd = (rangeEnd || rangeEnd !== 0) || this.findElement.defaultRange;
     const body = document.createElement('div');
     body.className = 'mr-slider';
+    
     const fill = document.createElement('div');
     fill.className = 'fill';
+    fill.appendChild(document.createElement('div'));
+    
     const thumb = document.createElement('div');
     thumb.className = 'thumb';
+    
     const toFill = document.createElement('div');
-    toFill.className = 'toFill';
+    toFill.className = 'unfilled';
+    const toFillChild = document.createElement('div');
+    toFillChild.className = 'unfill-child';
+    toFill.appendChild(toFillChild);
+    
     body.appendChild(fill);
     body.appendChild(thumb);
     body.appendChild(toFill);
