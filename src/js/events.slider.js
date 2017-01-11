@@ -28,8 +28,11 @@ export default class EventsSlider {
    */
   bindmouseover(cb, auto = false) {
     if (auto) this.customEventCB = cb;
-    this._private.get(this).fill.addEventListener('mouseover', this.seekIntent.bind(this));
-    this._private.get(this).toFill.addEventListener('mouseover', this.seekIntent.bind(this));
+    const fill = this._private.get(this).fill;
+    const toFill = this._private.get(this).toFill;
+    fill.addEventListener('mouseover', this.seekIntent.bind(this));
+    fill.
+    toFill.addEventListener('mouseover', this.seekIntent.bind(this));
   }
 
   bindthumbmove() {
@@ -80,7 +83,6 @@ export default class EventsSlider {
 
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
     const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-    console.info(fillIntentArea);
     findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
   }
 
@@ -92,11 +94,12 @@ export default class EventsSlider {
       let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
       rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
       let onLeft = event.offsetX;
-      onLeft = event.target.classList.contains('fill') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
+      let distance = this._private.get(this).fill.clientWidth;
+
+      onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance + this.thumbSize;
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      //console.info(fillIntentArea, onLeft);
       this.configObject(this._private.get(this).elem).fill = fillIntentArea;
     }
   }
@@ -112,6 +115,7 @@ export default class EventsSlider {
         if (range >= startFrom && range <= rangeEnd) {
           const fillArea = ((that._private.get(that).elem.clientWidth / rangeEnd) * range);
           const thumbArea = 20;
+          //console.info(that._private.get(that).elem.clientWidth - fillArea - thumbArea);
           that._private.get(that).fill.style.width = `${fillArea}px`;
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;

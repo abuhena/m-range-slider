@@ -8,7 +8,7 @@
   .unselect();
   .fill {
     width: 0;
-    transition: width 200ms;
+    transition: width 150ms;
     height: 20px;
     position: absolute;
     left: 0;
@@ -17,7 +17,7 @@
   }
   .unfilled {
     width: 0;
-    transition: width 200ms;
+    transition: width 150ms;
     height: 20px;
     position: absolute;
     right: 0;
@@ -30,7 +30,7 @@
     border: 2px solid @fill;
     border-radius: 50%;
     position: absolute;
-    transition: left 200ms, border 150ms, height 150ms, width 150ms;
+    transition: left 150ms, border 150ms, height 150ms, width 150ms;
     &:active {
       height: 0 !important;
       width: 0 !important;
@@ -49,5 +49,5 @@
   background-color: @body;
   position: relative;
   top: 10px;
-  transition: width 200ms
+  transition: width 150ms
 }
