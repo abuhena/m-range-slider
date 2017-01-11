@@ -79,8 +79,8 @@ export default class EventsSlider {
     let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
     rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
     let onLeft = event.offsetX;
-    onLeft = event.target.classList.contains('fill') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
-
+    onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
+    //change transition time while seeking through mouse
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
     const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
     findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
@@ -115,7 +115,6 @@ export default class EventsSlider {
         if (range >= startFrom && range <= rangeEnd) {
           const fillArea = ((that._private.get(that).elem.clientWidth / rangeEnd) * range);
           const thumbArea = 20;
-          //console.info(that._private.get(that).elem.clientWidth - fillArea - thumbArea);
           that._private.get(that).fill.style.width = `${fillArea}px`;
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
