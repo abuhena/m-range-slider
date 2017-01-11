@@ -45,13 +45,14 @@ window.onload = function () {
      * @returns {number|*}
      */
     MrSlider.prototype.getValue = function () {
-      return instance.findElement.getSliderByContext(this.slider).fill;
+      alert('test')
+      return instance.findElement.getSliderByContext(this.slider, this.sliderEvents).fill;
     };
     /**
      * @param num
      */
     MrSlider.prototype.setValue = function (num) {
-      instance.findElement.getSliderByContext(this.slider).fill = Number(num);
+      instance.findElement.getSliderByContext(this.slider, this.sliderEvents).fill = Number(num);
     };
     /**
      * @returns {*}

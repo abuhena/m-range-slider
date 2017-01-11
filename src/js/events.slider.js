@@ -20,6 +20,7 @@ export default class EventsSlider {
   
   bindchange(cb) {
     if (cb) this.customChangeCB = cb;
+    console.log('set cb', this.customChangeCB)
   }
 
   /**
@@ -82,7 +83,7 @@ export default class EventsSlider {
     //change transition time while seeking through mouse
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
     const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-    findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
+    this.configObject().fill = fillIntentArea;
   }
 
   /**
@@ -99,7 +100,7 @@ export default class EventsSlider {
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      this.configObject(this._private.get(this).elem).fill = fillIntentArea;
+      this.configObject().fill = fillIntentArea;
     }
   }
 
@@ -118,9 +119,8 @@ export default class EventsSlider {
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
           that._private.get(that).elem.setAttribute('data-fill', range);
-          console.info(that.customChangeCB);
+          console.log('cb', that.customChangeCB)
           if (that.customChangeCB) {
-            alert('test');
             that.customChangeCB({position: {
               fill: range,
               fillPX: fillArea

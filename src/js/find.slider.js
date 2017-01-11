@@ -49,9 +49,9 @@ export default class findElements {
   }
 
 
-  getSliderByContext(context) {
-    if (context.hasAttribute(this.attribute)) {
-      const events = new EventsSlider(context);
+  getSliderByContext(el, context) {
+    if (el.hasAttribute(this.attribute)) {
+      const events = context || new EventsSlider(el);
       return events.configObject(this);
     }
   }
