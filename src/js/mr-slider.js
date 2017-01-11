@@ -18,6 +18,12 @@ window.onload = function () {
           MrSlider.events.bindmouseover(val, true);
         }
       });
+      Object.defineProperty(MrSlider.events, 'onchange', {
+        set: function (val) {
+          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+          MrSlider.events.bindchange(val);
+        }
+      });
       return MrSlider;
     };
   })(createElement.instance, window);

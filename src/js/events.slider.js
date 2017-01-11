@@ -17,6 +17,10 @@ export default class EventsSlider {
     this.defaultRange = 100;
     this.thumbSize = 20;
   }
+  
+  bindchange(cb) {
+    if (cb) window.customChangeCB = cb;
+  }
 
   /**
    * @param cb
@@ -49,7 +53,10 @@ export default class EventsSlider {
     this._private.get(this).fill.addEventListener('click', this.seeked.bind(this));
     this._private.get(this).toFill.addEventListener('click', this.seeked.bind(this));
   }
-  
+
+  /**
+   * @param event
+   */
   seekIntent(event) {
     if (this.customEventCB) {
       let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
@@ -65,7 +72,10 @@ export default class EventsSlider {
       }});
     }
   }
-  
+
+  /**
+   * @param event
+   */
   seeked(event) {
     let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
     rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
@@ -76,7 +86,10 @@ export default class EventsSlider {
     const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
     findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
   }
-  
+
+  /**
+   * @param event
+   */
   thumbMove(event) {
     if (this.mousedown) {
       console.info(event);
@@ -90,5 +103,42 @@ export default class EventsSlider {
       //console.info(fillIntentArea, onLeft);
       findElements.instance.getSliderByContext(this._private.get(this).elem).fill = fillIntentArea;
     }
-  } 
+  }
+
+  configObject(context) {
+    const that = this;
+    return {
+      set fill(range) {
+        let startFrom = parseInt(that._private.get(that).elem.getAttribute('data-start'));
+        let rangeEnd = parseInt(that._private.get(that).elem.getAttribute('data-range'));
+        startFrom = !startFrom ? that.defaultStart : startFrom;
+        rangeEnd = !rangeEnd ? that.defaultRange : rangeEnd;
+        if (range >= startFrom && range <= rangeEnd) {
+          const fillArea = ((that._private.get(that).elem.clientWidth / rangeEnd) * range);
+          const thumbArea = 20;
+          that._private.get(that).fill.style.width = `${fillArea}px`;
+          that._private.get(that).thumb.style.left = `${fillArea}px`;
+          that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
+          that._private.get(that).elem.setAttribute('data-fill', range);
+          if (window.customChangeCB) {
+            window.customChangeCB({position: {
+              fill: range,
+              fillPX: fillArea
+            }});
+          }
+          return true;
+        }
+        return false;
+      },
+      get fill() {
+        let rangeEnd = parseFloat(that._private.get(that).elem.getAttribute('data-range'));
+        rangeEnd = (rangeEnd || rangeEnd !== 0) || that.defaultRange;
+        const currentFill = ((that._private.get(that).fill.clientWidth * rangeEnd)
+        / this._private.get(that).elem.clientWidth);
+        if (parseFloat(that._private.get(that).elem.getAttribute('data-fill')) === currentFill) {
+          return currentFill;
+        }
+      }
+    }
+  }
 }

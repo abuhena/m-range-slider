@@ -20,7 +20,7 @@
   }
   .unfilled {
     width: 0;
-    transition: width 250ms;
+    transition: width 200ms;
     height: 20px;
     position: absolute;
     right: 0;
@@ -33,12 +33,16 @@
     border: 2px solid @fill;
     border-radius: 50%;
     position: absolute;
-    transition: left 250ms;
+    transition: left 200ms, border 150ms, height 150ms, width 150ms;
+    &:active {
+      height: 0 !important;
+      width: 0 !important;
+      border: 10px solid @fill;
+    }
   }
 }
 
 .unfill-child {
-  transition: width 250ms;
   height: 2px;
   background-color: @body;
   position: relative;
