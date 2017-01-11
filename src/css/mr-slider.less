@@ -1,22 +1,19 @@
+@import "mixins.less";
 .mr-slider {
   height: 20px;
   width: 100%;
   position: relative;
   padding: 0;
   background-color: @water;
+  .unselect();
   .fill {
     width: 0;
-    transition: width 250ms;
+    transition: width 200ms;
     height: 20px;
     position: absolute;
     left: 0;
     cursor: pointer;
     background-color: transparent;
-    &:first-child {
-      height: 2px;
-      background-color: @fill;
-      top: 10px;
-    }
   }
   .unfilled {
     width: 0;
@@ -41,10 +38,16 @@
     }
   }
 }
-
+.fill-child {
+  height: 2px;
+  background-color: @fill;
+  position: relative;
+  top: 10px;
+}
 .unfill-child {
   height: 2px;
   background-color: @body;
   position: relative;
   top: 10px;
+  transition: width 200ms
 }

@@ -34,7 +34,9 @@ export default class createElements {
     
     const fill = document.createElement('div');
     fill.className = 'fill';
-    fill.appendChild(document.createElement('div'));
+    const fillChild = document.createElement('div');
+    fillChild.className = 'fill-child';
+    fill.appendChild(fillChild);
     
     const thumb = document.createElement('div');
     thumb.className = 'thumb';
