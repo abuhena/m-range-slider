@@ -130,13 +130,15 @@ export default class EventsSlider {
         return false;
       },
       get fill() {
-        let rangeEnd = parseFloat(that._private.get(that).elem.getAttribute('data-range'));
-        rangeEnd = (rangeEnd || rangeEnd !== 0) || that.defaultRange;
-        const currentFill = ((that._private.get(that).fill.clientWidth * rangeEnd)
-        / this._private.get(that).elem.clientWidth);
-        if (parseFloat(that._private.get(that).elem.getAttribute('data-fill')) === currentFill) {
-          return currentFill;
-        }
+        // let rangeEnd = parseFloat(that._private.get(that).elem.getAttribute('data-range'));
+        // rangeEnd = (rangeEnd || rangeEnd !== 0) || that.defaultRange;
+        // const currentFill = ((that._private.get(that).fill.clientWidth * rangeEnd)
+        // / that._private.get(that).elem.clientWidth);
+        // if (parseFloat(that._private.get(that).elem.getAttribute('data-fill')) === currentFill) {
+        //   alert('getting');
+        //   return currentFill;
+        // }
+        return Number(that._private.get(that).elem.getAttribute('data-fill'));
       }
     }
   }

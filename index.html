@@ -7,18 +7,30 @@
     <link rel="stylesheet" href=".tmp/mr-slider.css">
     <script>
         setTimeout(function () {
-            window.$slider = MrSlider('hola');
+            window.$slider = new MrSlider('hola');
             $slider.events.onchange = function (pos) {
+                alert('hola');
                 var el = document.getElementById('test');
-                el.innerHTML = pos.position.fill;
+                el.innerHTML = $slider.getValue();
             }
-        }, 1000)
+
+            window.$sliderX = new MrSlider('hola1');
+            $sliderX.events.onchange = function (pos) {
+                var el = document.getElementById('test1');
+                el.innerHTML = $sliderX.getValue();
+            }
+        }, 1000);
     </script>
 </head>
 <body>
 <div style="padding: 20px; margin: 0px auto; width: 800px; height: 150px; background-color: #DAD9D9;">
-    <div id="hola" data-mr-slider data-start="0" data-range="500"></div>
+
+    <div id="hola" data-mr-slider data-start="0" data-range="300"></div>
     <h3 id="test"></h3>
+
+    <div id="hola1" data-mr-slider data-start="0" data-range="300"></div>
+    <h3 id="test1"></h3>
+
 </div>
 </body>
 </html>

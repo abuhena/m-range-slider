@@ -8,23 +8,44 @@ import EventsSlider from './events.slider';
 window.onload = function () {
   (function (instance, window) {
     window.MrSlider = function (id) {
-      MrSlider.slider = instance.findElement.getSliderById(id);
-      console.dir(MrSlider.slider);
-      if (!MrSlider.slider) throw new Error(`Unable to find any slider corresponding #${id}`);
-      MrSlider.events = new EventsSlider(MrSlider.slider);
-      Object.defineProperty(MrSlider.events, 'onmouseover', {
+      this.slider = instance.findElement.getSliderById(id);
+      if (!this.slider) throw new Error(`Unable to find any slider corresponding #${id}`);
+      /**
+       * @type {EventsSlider}
+       */
+      this.events = new EventsSlider(this.slider);
+      var that = this;
+      Object.defineProperty(this.events, 'onmouseover', {
         set: function (val) {
           if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
-          MrSlider.events.bindmouseover(val, true);
+          that.events.bindmouseover(val, true);
         }
       });
-      Object.defineProperty(MrSlider.events, 'onchange', {
+      Object.defineProperty(this.events, 'onchange', {
         set: function (val) {
           if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
-          MrSlider.events.bindchange(val);
+          that.events.bindchange(val);
         }
       });
-      return MrSlider;
     };
+    /**
+     * @returns {number|*}
+     */
+    MrSlider.prototype.getValue = function () {
+      return instance.findElement.getSliderByContext(this.slider).fill;
+    };
+    /**
+     * @param num
+     */
+    MrSlider.prototype.setValue = function (num) {
+      instance.findElement.getSliderByContext(this.slider).fill = Number(num);
+    };
+    /**
+     * @returns {*}
+     */
+    MrSlider.prototype.valueOf = function () {
+      return this.slider;
+    }
+
   })(createElement.instance, window);
 };
