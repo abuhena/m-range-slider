@@ -8,14 +8,14 @@
     <script>
         setTimeout(function () {
             window.$slider = new MrSlider('hola');
-            $slider.events.onchange = function (pos) {
+            $slider.events().onchange = function (pos) {
                 alert('hola');
                 var el = document.getElementById('test');
                 el.innerHTML = $slider.getValue();
             }
 
             window.$sliderX = new MrSlider('hola1');
-            $sliderX.events.onchange = function (pos) {
+            $sliderX.events().onchange = function (pos) {
                 var el = document.getElementById('test1');
                 el.innerHTML = $sliderX.getValue();
             }

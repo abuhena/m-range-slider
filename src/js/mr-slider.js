@@ -13,21 +13,34 @@ window.onload = function () {
       /**
        * @type {EventsSlider}
        */
-      this.events = new EventsSlider(this.slider);
-      var that = this;
-      Object.defineProperty(this.events, 'onmouseover', {
-        set: function (val) {
-          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
-          that.events.bindmouseover(val, true);
-        }
-      });
-      Object.defineProperty(this.events, 'onchange', {
-        set: function (val) {
-          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
-          that.events.bindchange(val);
-        }
-      });
+      this.sliderEvents = new EventsSlider(this.slider);
+      // var that = this;
+      // Object.defineProperty(this.events, 'onmouseover', {
+      //   set: function (val) {
+      //     if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+      //     that.events.bindmouseover(val, true);
+      //   }
+      // });
+      // Object.defineProperty(this.events, 'onchange', {
+      //   set: function (val) {
+      //     if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+      //     that.events.bindchange(val);
+      //   }
+      // });
     };
+    MrSlider.prototype.events = function() {
+      var that = this;
+      return {
+        set onchange(val) {
+          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+            that.sliderEvents.bindchange(val);
+        },
+        set onmouseover(val) {
+          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+            that.sliderEvents.bindmouseover(val, true);
+       }
+      }
+    }
     /**
      * @returns {number|*}
      */

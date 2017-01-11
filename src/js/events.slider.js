@@ -19,7 +19,7 @@ export default class EventsSlider {
   }
   
   bindchange(cb) {
-    if (cb) window.customChangeCB = cb;
+    if (cb) this.customChangeCB = cb;
   }
 
   /**
@@ -31,7 +31,6 @@ export default class EventsSlider {
     const fill = this._private.get(this).fill;
     const toFill = this._private.get(this).toFill;
     fill.addEventListener('mouseover', this.seekIntent.bind(this));
-    fill.
     toFill.addEventListener('mouseover', this.seekIntent.bind(this));
   }
 
@@ -119,8 +118,10 @@ export default class EventsSlider {
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
           that._private.get(that).elem.setAttribute('data-fill', range);
-          if (window.customChangeCB) {
-            window.customChangeCB({position: {
+          console.info(that.customChangeCB);
+          if (that.customChangeCB) {
+            alert('test');
+            that.customChangeCB({position: {
               fill: range,
               fillPX: fillArea
             }});
