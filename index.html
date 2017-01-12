@@ -11,7 +11,10 @@
             $slider.events().onchange = function (pos) {
                 var el = document.getElementById('test');
                 el.innerHTML = $slider.getValue();
-            }
+            };
+            $slider.events().oninit = function (val) {
+                alert('with value '+ val);
+            };
 
             window.$sliderX = new MrSlider('hola1');
             setTimeout(function () {

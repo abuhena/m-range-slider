@@ -60,10 +60,10 @@ export default class EventsSlider {
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      this.customEventCB({position: {
-        canFill: Math.ceil(fillIntentArea),
-        canFillPX: onLeft
-      }});
+      this.customEventCB({
+        fill: fillIntentArea,
+        fillArea: onLeft
+      });
     }
   }
 
@@ -77,8 +77,7 @@ export default class EventsSlider {
     onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
     //change transition time while seeking through mouse
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
-    const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-    this.configObject().fill = fillIntentArea;
+    this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
   }
 
   /**
@@ -94,8 +93,7 @@ export default class EventsSlider {
       onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance + this.thumbSize;
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
-      const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      this.configObject().fill = fillIntentArea;
+      this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
     }
   }
 
@@ -115,10 +113,10 @@ export default class EventsSlider {
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
           that._private.get(that).elem.setAttribute('data-fill', range);
           if (that.customChangeCB) {
-            that.customChangeCB({position: {
+            that.customChangeCB({
               fill: range,
-              fillPX: fillArea
-            }});
+              fillArea: fillArea
+            });
           }
           return true;
         }
