@@ -51,9 +51,29 @@ module.exports = grunt => {
         },
       },
     },
+    uglify: {
+      dist: {
+        files: {
+          './mr.slider.min.js': ['./.tmp/mr-slider.js']
+        }
+      }
+    },
+    cssmin: {
+      dist: {
+        files: {
+          './mr.slider.min.css': ['./.tmp/mr-slider.css']
+        }
+      }
+    }
   });
   grunt.registerTask('serve', [
     'connect',
     'watch',
+  ]);
+  grunt.registerTask('build', [
+    'browserify',
+    'less',
+    'uglify',
+    'cssmin'
   ]);
 };
