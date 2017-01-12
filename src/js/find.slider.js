@@ -6,12 +6,19 @@ const singleton = Symbol();
 const singletonEnforcer = Symbol();
 
 export default class findElements {
+  /**
+   * @param sym
+   */
   constructor(sym) {
     if (sym !== singletonEnforcer) throw new Error('Cannot construct singleton');
     this.attribute = 'data-mr-slider';
     this.defaultStart = 0;
     this.defaultRange = 100;
   }
+
+  /**
+   * @returns {*}
+   */
   static get instance() {
     if (!this[singleton]) {
       this[singleton] = new findElements(singletonEnforcer);
@@ -30,7 +37,6 @@ export default class findElements {
         nodeArray.push(nodeList[i]);
       }
     }
-
     return nodeArray;
   }
 
@@ -48,7 +54,11 @@ export default class findElements {
     return null;
   }
 
-
+  /**
+   * @param el
+   * @param context
+   * @returns {{fill, fill}|*}
+   */
   getSliderByContext(el, context) {
     if (el.hasAttribute(this.attribute)) {
       const events = context || new EventsSlider(el);

@@ -3,6 +3,9 @@
  */
 
 export default class EventsSlider {
+  /**
+   * @param context
+   */
   constructor(context) {
     this._private = new WeakMap();
     this._private.set(this, {
@@ -15,7 +18,10 @@ export default class EventsSlider {
     this.defaultRange = 100;
     this.thumbSize = 20;
   }
-  
+
+  /**
+   * @param cb
+   */
   bindchange(cb) {
     if (cb) this.customChangeCB = cb;
   }
@@ -97,9 +103,16 @@ export default class EventsSlider {
     }
   }
 
+  /**
+   * @param context
+   * @returns {{fill, fill}}
+   */
   configObject(context) {
     const that = this;
     return {
+      /**
+       * @param range
+       */
       set fill(range) {
         let startFrom = parseInt(that._private.get(that).elem.getAttribute('data-start'));
         let rangeEnd = parseInt(that._private.get(that).elem.getAttribute('data-range'));
@@ -118,10 +131,11 @@ export default class EventsSlider {
               fillArea: fillArea
             });
           }
-          return true;
         }
-        return false;
       },
+      /**
+       * @returns {number}
+       */
       get fill() {
         return Number(that._private.get(that).elem.getAttribute('data-fill'));
       }
