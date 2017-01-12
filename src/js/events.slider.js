@@ -2,8 +2,6 @@
  * Created by Shariar Shaikot on 1/10/17.
  */
 
-import findElements from './find.slider';
-
 export default class EventsSlider {
   constructor(context) {
     this._private = new WeakMap();
@@ -20,7 +18,6 @@ export default class EventsSlider {
   
   bindchange(cb) {
     if (cb) this.customChangeCB = cb;
-    console.log('set cb', this.customChangeCB)
   }
 
   /**
@@ -37,12 +34,10 @@ export default class EventsSlider {
 
   bindthumbmove() {
     this._private.get(this).thumb.addEventListener('mousedown', function () {
-      console.info('mousedown');
       this.mousedown = true;
     }.bind(this));
     document.addEventListener('mouseup', function () {
       if (this.mousedown) {
-        console.info('mouseup');
         this.mousedown = false;
       }
     }.bind(this));
@@ -119,7 +114,6 @@ export default class EventsSlider {
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
           that._private.get(that).elem.setAttribute('data-fill', range);
-          console.log('cb', that.customChangeCB)
           if (that.customChangeCB) {
             that.customChangeCB({position: {
               fill: range,
@@ -131,14 +125,6 @@ export default class EventsSlider {
         return false;
       },
       get fill() {
-        // let rangeEnd = parseFloat(that._private.get(that).elem.getAttribute('data-range'));
-        // rangeEnd = (rangeEnd || rangeEnd !== 0) || that.defaultRange;
-        // const currentFill = ((that._private.get(that).fill.clientWidth * rangeEnd)
-        // / that._private.get(that).elem.clientWidth);
-        // if (parseFloat(that._private.get(that).elem.getAttribute('data-fill')) === currentFill) {
-        //   alert('getting');
-        //   return currentFill;
-        // }
         return Number(that._private.get(that).elem.getAttribute('data-fill'));
       }
     }

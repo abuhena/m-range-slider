@@ -14,10 +14,9 @@
             }
 
             window.$sliderX = new MrSlider('hola1');
-            $sliderX.events().onchange = function (pos) {
-                var el = document.getElementById('test1');
-                el.innerHTML = $sliderX.getValue();
-            }
+            setTimeout(function () {
+                $sliderX.setValue(20);
+            }, 3000)
         }, 1000);
     </script>
 </head>
