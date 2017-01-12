@@ -9,6 +9,13 @@
         setTimeout(function () {
             window.$slider = new MrSlider('hola');
             $slider.events().onchange = function (pos) {
+                if (pos.fill > 200) {
+                    $slider.setColorPalette({
+                        fill: '#F21557',
+                        body: '#3C3B3B',
+                        thumb: '#F21557',
+                    });
+                }
                 var el = document.getElementById('test');
                 el.innerHTML = $slider.getValue();
             };
@@ -26,7 +33,8 @@
 <body>
 <div style="padding: 20px; margin: 0px auto; width: 800px; height: 150px; background-color: #DAD9D9;">
 
-    <div id="hola" data-mr-slider data-start="0" data-range="300"></div>
+    <div id="hola" data-mr-slider data-start="0" data-range="300" data-thumb-color="#FF6D1E"
+    data-fill-color="#FF6D1E" data-body-color="#3C3B3B"></div>
     <h3 id="test"></h3>
 
     <div id="hola1" data-mr-slider data-start="0" data-range="100"></div>

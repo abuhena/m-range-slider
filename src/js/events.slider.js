@@ -27,6 +27,43 @@ export default class EventsSlider {
   }
 
   /**
+   * @param hex
+   * @returns {*[]}
+   */
+  static hexToRGB(hex) {
+    if (hex.length > 7) throw new Error('Unable to convert hex to RGB');
+    const hexString = hex.toString().substr(1, 6);
+    return [
+      parseInt(hexString.substr(0, 2), 16),
+      parseInt(hexString.substr(2, 2), 16),
+      parseInt(hexString.substr(4, 2), 16)
+    ];
+  }
+
+  /**
+   * @param colorPalette
+   */
+  setColorPalette(colorPalette) {
+    if (colorPalette && typeof colorPalette === 'object') {
+      if (colorPalette.fill && colorPalette.fill.length > 6 && colorPalette.fill.length < 8) {
+        let fillBGColor = EventsSlider.hexToRGB(colorPalette.fill);
+        fillBGColor = `rgb(${fillBGColor[0]}, ${fillBGColor[1]}, ${fillBGColor[2]})`;
+        this._private.get(this).fill.childNodes[0].style.backgroundColor = fillBGColor;
+      }
+      if (colorPalette.body && colorPalette.body.length > 6 && colorPalette.body.length < 8) {
+        let bodyBGColor = EventsSlider.hexToRGB(colorPalette.body);
+        bodyBGColor = `rgba(${bodyBGColor[0]}, ${bodyBGColor[1]}, ${bodyBGColor[2]}, 0.9)`;
+        this._private.get(this).toFill.childNodes[0].style.backgroundColor = bodyBGColor;
+      }
+      if (colorPalette.thumb && colorPalette.thumb.length > 6 && colorPalette.thumb.length < 8) {
+        let thumbBGColor = EventsSlider.hexToRGB(colorPalette.thumb);
+        thumbBGColor = `rgb(${thumbBGColor[0]}, ${thumbBGColor[1]}, ${thumbBGColor[2]})`;
+        this._private.get(this).thumb.style.borderColor = thumbBGColor;
+      }
+    }
+  }
+
+  /**
    * @param cb
    * @param auto
    */

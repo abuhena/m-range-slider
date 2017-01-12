@@ -27,14 +27,17 @@
   .thumb {
     height: 18px;
     width: 18px;
-    border: 2px solid @fill;
+    border-width: 2px;
+    border-style: solid;
+    border-color: @fill;
     border-radius: 50%;
     position: absolute;
     transition: left 150ms, border 150ms, height 150ms, width 150ms;
     &:active {
       height: 0 !important;
       width: 0 !important;
-      border: 10px solid @fill;
+      border-width: 10px;
+      border-style: solid;
     }
   }
 }

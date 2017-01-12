@@ -7,13 +7,13 @@ import EventsSlider from './events.slider';
 
 window.onload = function () {
   (function (instance, window) {
-    window.MrSlider = function (id) {
+    window.MrSlider = function (id, colorPalette) {
       this.slider = instance.findElement.getSliderById(id);
       if (!this.slider) throw new Error(`Unable to find any slider corresponding #${id}`);
       /**
        * @type {EventsSlider}
        */
-      this.sliderEvents = new EventsSlider(this.slider);
+      this.sliderEvents = new EventsSlider(this.slider, colorPalette);
       this.sliderEvents.bindthumbmove();
     };
     /**
@@ -61,11 +61,18 @@ window.onload = function () {
       instance.findElement.getSliderByContext(this.slider, this.sliderEvents).fill = Number(num);
     };
     /**
+     * @param colorPalette
+     * @returns {*}
+     */
+    MrSlider.prototype.setColorPalette = function (colorPalette) {
+      return this.sliderEvents.setColorPalette(colorPalette);
+    };
+    /**
      * @returns {*}
      */
     MrSlider.prototype.valueOf = function () {
       return this.slider;
-    }
+    };
 
   })(createElement.instance, window);
 };
