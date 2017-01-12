@@ -9,7 +9,6 @@
         setTimeout(function () {
             window.$slider = new MrSlider('hola');
             $slider.events().onchange = function (pos) {
-                alert('hola');
                 var el = document.getElementById('test');
                 el.innerHTML = $slider.getValue();
             }
@@ -28,7 +27,7 @@
     <div id="hola" data-mr-slider data-start="0" data-range="300"></div>
     <h3 id="test"></h3>
 
-    <div id="hola1" data-mr-slider data-start="0" data-range="300"></div>
+    <div id="hola1" data-mr-slider data-start="0" data-range="100"></div>
     <h3 id="test1"></h3>
 
 </div>

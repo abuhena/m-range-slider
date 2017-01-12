@@ -3,7 +3,6 @@
  */
 
 import findElements from './find.slider';
-import EventsSlider from './events.slider';
 
 const singleton = Symbol();
 const singletonEnforcer = Symbol();
@@ -51,8 +50,6 @@ export default class createElements {
     body.appendChild(thumb);
     body.appendChild(toFill);
     elem.appendChild(body);
-    const events = new EventsSlider(elem);
-    events.bindthumbmove();
     const slider = this.findElement.getSliderByContext(elem);
     slider.fill = startFrom;
   }

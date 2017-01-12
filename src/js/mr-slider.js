@@ -14,6 +14,7 @@ window.onload = function () {
        * @type {EventsSlider}
        */
       this.sliderEvents = new EventsSlider(this.slider);
+      this.sliderEvents.bindthumbmove();
       // var that = this;
       // Object.defineProperty(this.events, 'onmouseover', {
       //   set: function (val) {
@@ -45,7 +46,6 @@ window.onload = function () {
      * @returns {number|*}
      */
     MrSlider.prototype.getValue = function () {
-      alert('test')
       return instance.findElement.getSliderByContext(this.slider, this.sliderEvents).fill;
     };
     /**
