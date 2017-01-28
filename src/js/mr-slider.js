@@ -8,13 +8,18 @@ import EventsSlider from './events.slider';
 window.onload = function () {
   (function (instance, window) {
     window.MrSlider = function (id, colorPalette) {
+		this.colorPalette = colorPalette;
       this.slider = instance.findElement.getSliderById(id);
-      if (!this.slider) throw new Error(`Unable to find any slider corresponding #${id}`);
+      if (!this.slider) this.slider = instance.createSliderById(id);
       /**
        * @type {EventsSlider}
        */
-      this.sliderEvents = new EventsSlider(this.slider, colorPalette);
-      this.sliderEvents.bindthumbmove();
+      try {
+		this.sliderEvents = new EventsSlider(this.slider, colorPalette);
+		this.sliderEvents.bindthumbmove();
+	  } catch (e) {
+		  //do nothing here
+	  }
     };
     /**
      * @returns {{onchange, onmouseover, oninit}}
@@ -48,6 +53,16 @@ window.onload = function () {
         }
       }
     };
+	MrSlider.prototype.getSlider = function() {
+		return this.slider;
+	},
+	MrSlider.prototype.appendSlider = function (parent) {
+		return instance.appendSlider(parent, this.slider, () => {
+			alert('hola');
+			this.sliderEvents = new EventsSlider(this.slider, this.colorPalette);
+			this.sliderEvents.bindthumbmove();
+		});
+	}
     /**
      * @returns {number|*}
      */

@@ -1,0 +1,17 @@
+{
+  "name": "m-range-slider",
+  "description": "Simple range slider",
+  "main": "index.js",
+  "authors": [
+    "Shariar Shaikot"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/abuhena/m-range-slider",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

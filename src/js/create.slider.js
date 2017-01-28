@@ -22,6 +22,24 @@ export default class createElements {
     }
     return this[singleton];
   }
+  
+  createSliderById(id) {
+	const emptyElem = document.createElement('div');
+	emptyElem.setAttribute('id', id);
+	emptyElem.setAttribute('data-mr-slider', '');
+	emptyElem.setAttribute('data-start', '0');
+	emptyElem.setAttribute('data-range', '100');
+	return emptyElem;
+  }
+  
+  appendSlider(parentEl, slider, cb) {
+	const observer = new MutationObserver((mutations) => {
+		this.createCustom(slider);
+		return cb();
+	});
+	observer.observe(parentEl, { childList: true });
+	parentEl.appendChild(slider);
+  }
 
   /**
    * @param hex
@@ -43,8 +61,8 @@ export default class createElements {
   createCustom(elem) {
     let startFrom = parseInt(elem.getAttribute('data-start'));
     let rangeEnd = parseInt(elem.getAttribute('data-range'));
-    startFrom = (startFrom || startFrom !== 0) || this.findElement.defaultStart;
-    rangeEnd = (rangeEnd || rangeEnd !== 0) || this.findElement.defaultRange;
+    startFrom = (startFrom || startFrom !== 0) ? this.findElement.defaultStart : startFrom;
+    rangeEnd = (rangeEnd || rangeEnd !== 0) ? this.findElement.defaultRange : rangeEnd;
     const body = document.createElement('div');
     body.className = 'mr-slider';
     
