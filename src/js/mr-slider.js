@@ -5,7 +5,7 @@
 import createElement from './create.slider';
 import EventsSlider from './events.slider';
 
-window.onload = function () {
+window.addEventListener('load', function () {
   (function (instance, window) {
     window.MrSlider = function (id, colorPalette) {
 		this.colorPalette = colorPalette;
@@ -90,4 +90,4 @@ window.onload = function () {
     };
 
   })(createElement.instance, window);
-};
+})
