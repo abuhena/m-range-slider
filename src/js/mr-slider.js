@@ -58,7 +58,6 @@ window.addEventListener('load', function () {
 	},
 	MrSlider.prototype.appendSlider = function (parent) {
 		return instance.appendSlider(parent, this.slider, () => {
-			alert('hola');
 			this.sliderEvents = new EventsSlider(this.slider, this.colorPalette);
 			this.sliderEvents.bindthumbmove();
 		});
