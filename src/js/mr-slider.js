@@ -56,10 +56,11 @@ window.addEventListener('load', function () {
 	MrSlider.prototype.getSlider = function() {
 		return this.slider;
 	},
-	MrSlider.prototype.appendSlider = function (parent) {
+	MrSlider.prototype.appendSlider = function (parent, done) {
 		return instance.appendSlider(parent, this.slider, () => {
 			this.sliderEvents = new EventsSlider(this.slider, this.colorPalette);
 			this.sliderEvents.bindthumbmove();
+			if (done) done();
 		});
 	}
     /**
