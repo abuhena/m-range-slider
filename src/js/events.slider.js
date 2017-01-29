@@ -85,6 +85,7 @@ export default class EventsSlider {
       }
     }.bind(this));
     this._private.get(this).fill.addEventListener('mousemove', this.thumbMove.bind(this));
+    this._private.get(this).thumb.addEventListener('mousemove', this.thumbMove.bind(this));
     this._private.get(this).toFill.addEventListener('mousemove', this.thumbMove.bind(this));
 
     this._private.get(this).fill.addEventListener('click', this.seeked.bind(this));
@@ -133,7 +134,7 @@ export default class EventsSlider {
       let onLeft = event.offsetX;
       let distance = this._private.get(this).fill.clientWidth;
 
-      onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance + this.thumbSize;
+      onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance;
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
