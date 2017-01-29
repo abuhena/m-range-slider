@@ -23,7 +23,9 @@
             };
 
             window.$sliderX = new MrSlider('hola1');
-			$sliderX.appendSlider(document.getElementById('gola'));
+			$sliderX.appendSlider(document.getElementById('gola'), function() {
+				alert('done!');
+			});
         }, 1000);
     </script>
 </head>
