@@ -100,7 +100,7 @@ export default class EventsSlider {
       let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
       rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
       let onLeft = event.offsetX;
-      onLeft = event.target.classList.contains('fill') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
+      onLeft = event.target.classList.contains('fill') ? onLeft: onLeft + this._private.get(this).fill.clientWidth; //thumbs removed
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
@@ -118,7 +118,7 @@ export default class EventsSlider {
     let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
     rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
     let onLeft = event.offsetX;
-    onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + this._private.get(this).fill.clientWidth + this.thumbSize;
+    onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + this._private.get(this).fill.clientWidth; //thumbs removed
     //change transition time while seeking through mouse
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
     this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
@@ -134,7 +134,7 @@ export default class EventsSlider {
       let onLeft = event.offsetX;
       let distance = this._private.get(this).fill.clientWidth;
 
-      onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance;
+      onLeft = event.target.classList.contains('fill') || event.target.classList.contains('fill-child') ? onLeft: onLeft + distance; //thumbs removed
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
