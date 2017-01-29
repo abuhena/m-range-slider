@@ -52,7 +52,7 @@ export default class EventsSlider {
       }
       if (colorPalette.body && colorPalette.body.length > 6 && colorPalette.body.length < 8) {
         let bodyBGColor = EventsSlider.hexToRGB(colorPalette.body);
-        bodyBGColor = `rgba(${bodyBGColor[0]}, ${bodyBGColor[1]}, ${bodyBGColor[2]}, 0.9)`;
+        bodyBGColor = `rgba(${bodyBGColor[0]}, ${bodyBGColor[1]}, ${bodyBGColor[2]}, 0.75)`;
         this._private.get(this).toFill.childNodes[0].style.backgroundColor = bodyBGColor;
       }
       if (colorPalette.thumb && colorPalette.thumb.length > 6 && colorPalette.thumb.length < 8) {
