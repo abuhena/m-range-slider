@@ -20,6 +20,7 @@
                 el.innerHTML = $slider.getValue();
             };
             $slider.events().oninit = function (val) {
+				$slider.setRange(1000);
             };
 
             window.$sliderX = new MrSlider('hola1');

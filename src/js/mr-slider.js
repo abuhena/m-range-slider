@@ -75,6 +75,10 @@ window.addEventListener('load', function () {
     MrSlider.prototype.setValue = function (num) {
       instance.findElement.getSliderByContext(this.slider, this.sliderEvents).fill = Number(num);
     };
+	
+	MrSlider.prototype.setRange = function (num) {
+      this.slider.setAttribute('data-range', num);
+    };
     /**
      * @param colorPalette
      * @returns {*}
