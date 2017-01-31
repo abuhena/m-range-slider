@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
          * @param val
          */
         set onchange(val) {
-          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+          if (typeof val !== 'function') throw new Error('onchange event expecting a callback');
             that.sliderEvents.bindchange(val);
         },
         /**
@@ -44,8 +44,22 @@ window.addEventListener('load', function () {
         /**
          * @param val
          */
+        set onmousemove(val) {
+          if (typeof val !== 'function') throw new Error('onmousemove event expecting a callback');
+            that.sliderEvents.bindmousemove(val, true);
+       },
+        /**
+         * @param val
+         */
+        set onmouseout(val) {
+          if (typeof val !== 'function') throw new Error('onmousemove event expecting a callback');
+            that.sliderEvents.bindmouseout(val);
+       },
+        /**
+         * @param val
+         */
         set oninit(val) {
-          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
+          if (typeof val !== 'function') throw new Error('oninit event expecting a callback');
           if (!that.isInitialized) {
             that.isInitialized = true;
             val(that.getValue());

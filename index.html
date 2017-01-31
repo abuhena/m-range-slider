@@ -22,6 +22,9 @@
             $slider.events().oninit = function (val) {
 				$slider.setRange(1000);
             };
+			$slider.events().onmousemove = function (val) {
+				console.log(val);
+            };
 
             window.$sliderX = new MrSlider('hola1');
 			$sliderX.appendSlider(document.getElementById('gola'), function() {
