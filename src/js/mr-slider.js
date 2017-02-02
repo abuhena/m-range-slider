@@ -15,56 +15,44 @@ window.addEventListener('load', function () {
        * @type {EventsSlider}
        */
       try {
-		this.sliderEvents = new EventsSlider(this.slider, colorPalette);
-		this.sliderEvents.bindthumbmove();
+		    this.sliderEvents = new EventsSlider(this.slider, colorPalette);
+		    this.sliderEvents.bindthumbmove();
+        this.sliderEvents.bindmouseover();
+        this.sliderEvents.bindmousemove();
 	  } catch (e) {
 		  //do nothing here
 	  }
     };
-    /**
-     * @returns {{onchange, onmouseover, oninit}}
-     */
-    MrSlider.prototype.events = function() {
-      var that = this;
-      return {
-        /**
-         * @param val
-         */
-        set onchange(val) {
-          if (typeof val !== 'function') throw new Error('onchange event expecting a callback');
-            that.sliderEvents.bindchange(val);
-        },
-        /**
-         * @param val
-         */
-        set onmouseover(val) {
-          if (typeof val !== 'function') throw new Error('onmouseover event expecting a callback');
-            that.sliderEvents.bindmouseover(val, true);
-       },
-        /**
-         * @param val
-         */
-        set onmousemove(val) {
-          if (typeof val !== 'function') throw new Error('onmousemove event expecting a callback');
-            that.sliderEvents.bindmousemove(val, true);
-       },
-        /**
-         * @param val
-         */
-        set onmouseout(val) {
-          if (typeof val !== 'function') throw new Error('onmousemove event expecting a callback');
-            that.sliderEvents.bindmouseout(val);
-       },
-        /**
-         * @param val
-         */
-        set oninit(val) {
-          if (typeof val !== 'function') throw new Error('oninit event expecting a callback');
-          if (!that.isInitialized) {
-            that.isInitialized = true;
-            val(that.getValue());
-          }
+    MrSlider.prototype.on = function (event, callabck) {
+      const events = ['init', 'change', 'mouseover', 'mousemove', 'mouseout'];
+      if (events.indexOf(event) > -1) {
+        switch (event) {
+          case 'init':
+            if (typeof callabck !== 'function') throw new Error('oninit event expecting a callback');
+            if (!this.isInitialized) {
+              this.isInitialized = true;
+              callabck(this.getSlider());
+            }
+            break;
+          case 'change':
+            if (typeof callabck !== 'function') throw new Error('onchange event expecting a callback');
+            this.sliderEvents.customChangeCB.push(callabck);
+            break;
+          case 'mouseover':
+            if (typeof callabck !== 'function') throw new Error('onmouseover event expecting a callback');
+            this.sliderEvents.customEventCB.push(callabck);
+            break;
+          case 'mousemove':
+            if (typeof callabck !== 'function') throw new Error('onmousemove event expecting a callback');
+            this.sliderEvents.customMoveEventCB.push(callabck);
+            break;
+          case 'mouseout':
+            if (typeof callabck !== 'function') throw new Error('onmouseout event expecting a callback');
+            this.sliderEvents.bindmouseout(callabck);
+            break;
         }
+      } else {
+        console.warn('No actual event found');
       }
     };
 	MrSlider.prototype.getSlider = function() {
@@ -74,6 +62,8 @@ window.addEventListener('load', function () {
 		return instance.appendSlider(parent, this.slider, () => {
 			this.sliderEvents = new EventsSlider(this.slider, this.colorPalette);
 			this.sliderEvents.bindthumbmove();
+      this.sliderEvents.bindmouseover();
+      this.sliderEvents.bindmousemove();
 			if (done) done();
 		});
 	}

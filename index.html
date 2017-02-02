@@ -8,27 +8,33 @@
     <script>
         setTimeout(function () {
             window.$slider = new MrSlider('hola');
-            $slider.events().onchange = function (pos) {
-                if (pos.fill > 200) {
-                    $slider.setColorPalette({
-                        fill: '#F21557',
-                        body: '#3C3B3B',
-                        thumb: '#F21557',
-                    });
-                }
-                var el = document.getElementById('test');
-                el.innerHTML = $slider.getValue();
-            };
-            $slider.events().oninit = function (val) {
-				$slider.setRange(1000);
-            };
-			$slider.events().onmousemove = function (val) {
-				console.log(val);
-            };
+
 
             window.$sliderX = new MrSlider('hola1');
 			$sliderX.appendSlider(document.getElementById('gola'), function() {
-				alert('done!');
+                $sliderX.on('change', function (pos) {
+                    if (pos.fill > 200) {
+                        $sliderX.setColorPalette({
+                            fill: '#F21557',
+                            body: '#3C3B3B',
+                            thumb: '#F21557',
+                        });
+                    }
+                    var el = document.getElementById('test');
+                    el.innerHTML = $sliderX.getValue();
+                });
+                $sliderX.on('change', function () {
+                    alert('hola');
+                });
+                $sliderX.on('init', function (val) {
+                    $sliderX.setRange(1000);
+                });
+                $sliderX.on('mouseout', function (val) {
+                    console.log('mouseout');
+                });
+                $sliderX.on('mouseover', function (val) {
+                    console.log(val);
+                });
 			});
         }, 1000);
     </script>

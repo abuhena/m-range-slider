@@ -17,14 +17,17 @@ export default class EventsSlider {
     this.defaultStart = 0;
     this.defaultRange = 100;
     this.thumbSize = 20;
+    this.customEventCB = [];
+    this.customMoveEventCB = [];
+    this.customChangeCB = [];
   }
 
   /**
    * @param cb
    */
-  bindchange(cb) {
-    if (cb) this.customChangeCB = cb;
-  }
+  // bindchange(cb) {
+  //   if (cb) this.customChangeCB = cb;
+  // }
 
   /**
    * @param hex
@@ -67,16 +70,16 @@ export default class EventsSlider {
    * @param cb
    * @param auto
    */
-  bindmouseover(cb, auto = false) {
-    if (auto) this.customEventCB = cb;
+  bindmouseover() {
+    //if (auto) this.customEventCB = cb;
     const fill = this._private.get(this).fill;
     const toFill = this._private.get(this).toFill;
     fill.addEventListener('mouseover', this.seekIntent.bind(this));
     toFill.addEventListener('mouseover', this.seekIntent.bind(this));
   }
   
-  bindmousemove(cb, auto = false) {
-	if (auto) this.customMoveEventCB = cb;
+  bindmousemove() {
+	//if (auto) this.customMoveEventCB = cb;
 	const fill = this._private.get(this).fill;
     const toFill = this._private.get(this).toFill;
     fill.addEventListener('mousemove', this.seekIntent.bind(this));
@@ -119,17 +122,19 @@ export default class EventsSlider {
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       const fillIntentArea = rangeEnd * fillIntentAreaPercent / 100;
-      if (this.customEventCB) {
-		 this.customEventCB({
-			fill: fillIntentArea,
-			fillArea: onLeft
-		});
-	  } else {
-		this.customMoveEventCB({
-			fill: fillIntentArea,
-			fillArea: onLeft
-		});
-	  } 
+
+      this.customEventCB.forEach(each => {
+        each({
+          fill: fillIntentArea,
+          fillArea: onLeft
+        });
+      });
+      this.customMoveEventCB.forEach(each => {
+        each({
+          fill: fillIntentArea,
+          fillArea: onLeft
+        });
+      });
     }
   }
 
@@ -185,12 +190,12 @@ export default class EventsSlider {
           that._private.get(that).thumb.style.left = `${fillArea}px`;
           that._private.get(that).toFill.style.width = `${that._private.get(that).elem.clientWidth - fillArea - thumbArea}px`;
           that._private.get(that).elem.setAttribute('data-fill', range);
-          if (that.customChangeCB) {
-            that.customChangeCB({
+          that.customChangeCB.forEach(each => {
+            each({
               fill: range,
-              fillArea: fillArea
+              fillArea
             });
-          }
+          });
         }
       },
       /**
