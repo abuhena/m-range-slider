@@ -22,6 +22,7 @@ export default class EventsSlider {
     this.customChangeCB = [];
 	this.customThumbsDownCB = [];
 	this.customThumbsUpCB = [];
+	this.customClickCB = [];
   }
 
   /**
@@ -154,6 +155,9 @@ export default class EventsSlider {
     //change transition time while seeking through mouse
     const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
     this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
+	this.customClickCB.forEach(each => {
+		each();
+	});
   }
 
   /**

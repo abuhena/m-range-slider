@@ -24,7 +24,8 @@ window.addEventListener('load', function () {
 	  }
     };
     MrSlider.prototype.on = function (event, callabck) {
-      const events = ['init', 'change', 'mouseover', 'mousemove', 'mouseout', 'mousedown', 'mouseup'];
+      const events = ['init', 'change', 'mouseover', 'mousemove',
+	  'mouseout', 'mousedown', 'mouseup', 'click'];
       if (events.indexOf(event) > -1) {
         switch (event) {
           case 'init':
@@ -53,6 +54,10 @@ window.addEventListener('load', function () {
           case 'mousedown':
             if (typeof callabck !== 'function') throw new Error('onmousemove event expecting a callback');
             this.sliderEvents.customThumbsDownCB.push(callabck);
+            break;
+          case 'click':
+            if (typeof callabck !== 'function') throw new Error('onmousemove event expecting a callback');
+            this.sliderEvents.customClickCB.push(callabck);
             break;
           case 'mouseout':
             if (typeof callabck !== 'function') throw new Error('onmouseout event expecting a callback');
