@@ -23,8 +23,11 @@
                     var el = document.getElementById('test');
                     el.innerHTML = $sliderX.getValue();
                 });
-                $sliderX.on('change', function () {
-                    alert('hola');
+                $sliderX.on('mousedown', function () {
+				console.log('mousedown');
+                });
+                $sliderX.on('mouseup', function () {
+				console.log('mouseup');
                 });
                 $sliderX.on('init', function (val) {
                     $sliderX.setRange(1000);
@@ -33,7 +36,6 @@
                     console.log('mouseout');
                 });
                 $sliderX.on('mouseover', function (val) {
-                    console.log(val);
                 });
 			});
         }, 1000);

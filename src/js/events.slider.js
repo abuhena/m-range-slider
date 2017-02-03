@@ -20,6 +20,8 @@ export default class EventsSlider {
     this.customEventCB = [];
     this.customMoveEventCB = [];
     this.customChangeCB = [];
+	this.customThumbsDownCB = [];
+	this.customThumbsUpCB = [];
   }
 
   /**
@@ -99,6 +101,9 @@ export default class EventsSlider {
     }.bind(this));
     document.addEventListener('mouseup', function () {
       if (this.mousedown) {
+		  this.customThumbsUpCB.forEach(each => {
+			each();
+		  });
         this.mousedown = false;
       }
     }.bind(this));
@@ -165,6 +170,9 @@ export default class EventsSlider {
 
       const fillIntentAreaPercent = ((onLeft / this._private.get(this).elem.clientWidth) * 100);
       this.configObject().fill = rangeEnd * fillIntentAreaPercent / 100;
+	  this.customThumbsDownCB.forEach(each => {
+		each();
+	  });
     }
   }
 
