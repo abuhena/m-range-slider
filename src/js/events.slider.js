@@ -14,6 +14,7 @@ export default class EventsSlider {
       thumb: context.childNodes[0].childNodes[1],
       toFill: context.childNodes[0].childNodes[2],
     });
+	window.addEventListener('resize', this.updateSize.bind(this));
     this.defaultStart = 0;
     this.defaultRange = 100;
     this.thumbSize = 20;
@@ -178,6 +179,22 @@ export default class EventsSlider {
 		each();
 	  });
     }
+  }
+  
+  updateSize() {
+	let range = this._private.get(this).elem.getAttribute('data-fill');
+	if (range) {
+		let startFrom = parseInt(this._private.get(this).elem.getAttribute('data-start'));
+		let rangeEnd = parseInt(this._private.get(this).elem.getAttribute('data-range'));
+		startFrom = !startFrom ? this.defaultStart : startFrom;
+		rangeEnd = !rangeEnd ? this.defaultRange : rangeEnd;
+		range = Number(range);
+		const fillArea = ((this._private.get(this).elem.clientWidth / rangeEnd) * range);
+        const thumbArea = 20;
+        this._private.get(this).fill.style.width = `${fillArea}px`;
+        this._private.get(this).thumb.style.left = `${fillArea}px`;
+        this._private.get(this).toFill.style.width = `${this._private.get(this).elem.clientWidth - fillArea - thumbArea}px`;
+	}
   }
 
   /**
