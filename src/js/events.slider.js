@@ -134,13 +134,13 @@ export default class EventsSlider {
         each({
           fill: fillIntentArea,
           fillArea: onLeft
-        });
+        }, event);
       });
       this.customMoveEventCB.forEach(each => {
         each({
           fill: fillIntentArea,
           fillArea: onLeft
-        });
+        }, event);
       });
     }
   }
