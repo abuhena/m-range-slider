@@ -103,6 +103,8 @@ export default class createElements {
     body.appendChild(thumb);
     body.appendChild(toFill);
     elem.appendChild(body);
+	elem.style.height = '25px';
+	elem.style.paddingTop = '2px';
     const slider = this.findElement.getSliderByContext(elem);
     slider.fill = startFrom;
   }
