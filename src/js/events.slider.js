@@ -93,6 +93,9 @@ export default class EventsSlider {
   bindmouseout(cb) {
 	const fill = this._private.get(this).fill;
     const toFill = this._private.get(this).toFill;
+    //fill.addEventListener('mouseout', cb);
+    //toFill.addEventListener('mouseout', cb);
+	console.dir(toFill.firstChild);
 	this._private.get(this).elem.addEventListener('mouseout', (event) => {
 		const _private = this._private.get(this);
 		if (event.target === toFill.firstChild || event.target === fill.firstChild || event.target === _private.thumb ||
@@ -105,7 +108,9 @@ export default class EventsSlider {
 
   bindthumbmove() {
     this._private.get(this).thumb.addEventListener('mousedown', function () {
-      this.mousedown = true;
+	  setTimeout(() => {
+		  this.mousedown = true;
+	  }, 0);
     }.bind(this));
     document.addEventListener('mouseup', function () {
       if (this.mousedown) {
