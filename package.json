@@ -1,6 +1,6 @@
 {
-  "name": "m-range-slider",
-  "version": "0.0.0",
+  "name": "metro-range-slider",
+  "version": "0.1.4",
   "description": "Simple range slider",
   "main": "index.js",
   "scripts": {
